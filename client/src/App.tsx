@@ -1,11 +1,16 @@
-import { Layout } from './components';
+import React from 'react';
+import { Layout, Sidebar } from './components';
+import { About, Display, Templates } from './views';
 
-function App() {
+const App = () => {
   return (
     <Layout>
-
+      <Sidebar />
+      <Display />
+      <Templates />
+      <About />
     </Layout>
   );
-}
+};
 
 export default App;
