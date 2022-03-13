@@ -1,1 +1,1 @@
-declare module "layout.module.css";
+declare module "*layout.module.css";
