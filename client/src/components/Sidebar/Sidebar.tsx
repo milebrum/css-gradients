@@ -6,7 +6,9 @@ import styles from './Sidebar.module.css';
 const Sidebar: React.FC<{}> = () => (
   <div className={styles.root}>
     <Header />
-    <PrimaryButton />
+    <PrimaryButton
+      label="Load from template"
+    />
     <Form />
     <ColourSelector />
     <Footer />

@@ -1,4 +1,6 @@
 .root {
+  display: flex;
+  flex-direction: column;
   width: 22vw;
   height: 100vh;
   padding: 30px 32px;
