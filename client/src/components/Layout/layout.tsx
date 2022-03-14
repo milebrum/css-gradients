@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from './layout.module.css';
+import styles from './Layout.module.css';
 
 const Layout: React.FC<{}> = (props) => {
   const { children } = props;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.root}>
       {children}
     </div>
   );

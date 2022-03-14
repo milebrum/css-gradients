@@ -1,4 +1,3 @@
-import Layout from './Layout/layout';
 import Sidebar from './Sidebar/Sidebar';
 
-export { Layout, Sidebar };
+export default Sidebar;

@@ -1,11 +1,10 @@
 import { Box } from '@mui/material';
 import React from 'react';
 
-const About = () => {
-  return (
-    <Box>
-    </Box>
-  );
-};
+const About: React.FC<{}> = () => (
+  <div>
+    <Box />
+  </div>
+);
 
 export default About;

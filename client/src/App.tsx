@@ -1,16 +1,15 @@
 import React from 'react';
-import { Layout, Sidebar } from './components';
+import Sidebar from './components';
+import { Layout } from './components/Layout';
 import { About, Display, Templates } from './views';
 
-const App = () => {
-  return (
-    <Layout>
-      <Sidebar />
-      <Display />
-      <Templates />
-      <About />
-    </Layout>
-  );
-};
+const App: React.FC<{}> = () => (
+  <Layout>
+    <Sidebar />
+    <Display />
+    <Templates />
+    <About />
+  </Layout>
+);
 
 export default App;

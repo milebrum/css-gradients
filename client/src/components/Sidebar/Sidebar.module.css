@@ -1,0 +1,7 @@
+.root {
+  width: 22vw;
+  height: 100vh;
+  padding: 30px 32px;
+  box-shadow: 2px 0 2px 0 rgb(0 0 0 / 15%);
+  overflow-y: auto;
+}

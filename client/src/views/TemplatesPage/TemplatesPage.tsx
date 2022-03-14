@@ -1,11 +1,10 @@
 import { Box } from '@mui/material';
 import React from 'react';
 
-const Templates = () => {
-  return (
-    <Box>
-    </Box>
-  );
-};
+const Templates: React.FC<{}> = () => (
+  <div>
+    <Box />
+  </div>
+);
 
 export default Templates;

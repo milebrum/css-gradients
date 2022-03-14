@@ -1,11 +1,16 @@
-import { Box } from '@mui/material';
 import React from 'react';
+import { ColourSelector, Form, PrimaryButton } from '../common';
+import { Footer, Header } from '../Layout';
+import styles from './Sidebar.module.css';
 
-const Sidebar = () => {
-  return (
-    <Box>
-    </Box>
-  );
-};
+const Sidebar: React.FC<{}> = () => (
+  <div className={styles.root}>
+    <Header />
+    <PrimaryButton />
+    <Form />
+    <ColourSelector />
+    <Footer />
+  </div>
+);
 
 export default Sidebar;
