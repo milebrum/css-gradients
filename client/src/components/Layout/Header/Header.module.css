@@ -1,0 +1,13 @@
+.root {
+  width: 100%;
+  height: auto;
+  margin-bottom: 14px;
+}
+
+.textLogo {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  width: 140px;
+}
