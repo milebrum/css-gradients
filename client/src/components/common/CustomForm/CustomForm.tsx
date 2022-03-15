@@ -1,7 +1,8 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
+import styles from './CustomForm.module.css';
 import { FormField, FormFieldType } from '../template/types';
 import { ColourButton, InputField, RadioButtons } from '.';
 
@@ -16,35 +17,60 @@ const CustomForm: React.FC<FormProps> = (props) => {
   const {
     onComplete, formFields, submitLabel, initialValues,
   } = props;
+  const [areHiddenFields, setAreHiddenFields] = React.useState(false);
+  const [hiddenFields, setHiddenFields] = React.useState<FormField[]>([]);
 
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().required('This field is required'),
-    author: Yup.string().required('This field is required'),
-  });
+  React.useEffect(() => {
+    formFields.forEach((formField) => {
+      if (!formField.display) {
+        setAreHiddenFields(true);
+      }
+    });
+  }, [formFields]);
+
+  const showHiddenFields = () => {
+    const onlyHiddenFields = formFields.filter((f) => !f.display);
+    onlyHiddenFields.forEach((field) => {
+      hiddenFields.push(field);
+    });
+    setHiddenFields(hiddenFields);
+    setAreHiddenFields(false);
+  };
 
   const renderFields = (formField: FormField) => {
     switch (formField.type) {
       case FormFieldType.RADIO:
         return formField.optionsType && formField.options && (
-          <RadioButtons
-            title={formField.title}
-            type={formField.optionsType}
-            radioButtons={formField.options}
-            initialValue={`${initialValues}.${formField.id}`}
-          />
+          <Box className={styles.formSection} key={formField.id}>
+            <RadioButtons
+              title={formField.title}
+              type={formField.optionsType}
+              radioButtons={formField.options}
+              initialValue={initialValues[formField.id]}
+            />
+          </Box>
         );
       case FormFieldType.INPUT:
         return (
-          <InputField title={formField.title} />
+          <Box className={styles.formSection} key={formField.id}>
+            <InputField title={formField.title} />
+          </Box>
         );
       case FormFieldType.COLOUR:
         return (
-          <ColourButton title={formField.title} />
+          <Box className={styles.formSection} key={formField.id}>
+            <ColourButton title={formField.title} />
+          </Box>
         );
       default:
         return null;
     }
   };
+
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required('This field is required'),
+    author: Yup.string().required('This field is required'),
+  });
 
   return (
     <Formik
@@ -55,11 +81,14 @@ const CustomForm: React.FC<FormProps> = (props) => {
       }}
       validationSchema={validationSchema}
     >
-      <Form>
+      <Form className={styles.form}>
         {formFields.map((formField) => (
-          renderFields(formField)
+          formField.display && renderFields(formField)
         ))}
-        <Button type="submit">
+        {hiddenFields.map((hiddenField) => (
+          renderFields(hiddenField)
+        ))}
+        <Button type={areHiddenFields ? 'button' : 'submit'} onClick={() => areHiddenFields && showHiddenFields()}>
           {submitLabel}
         </Button>
       </Form>

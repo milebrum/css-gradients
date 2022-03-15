@@ -10,41 +10,47 @@ const Sidebar: React.FC<{}> = () => {
     title: 'Style',
     optionsType: 'text',
     options: ['Linear', 'Radial'],
+    display: true,
   }, {
     id: 'direction',
     type: 'radio',
     title: 'Direction',
     optionsType: 'icon',
     options: ['arrow-up-left', 'arrow-up', 'arrow-up-right', 'arrow-left', 'circle_middle', 'arrow-right', 'arrow-down-left', 'arrow-down', 'arrow-down-right'],
+    display: true,
   }, {
     id: 'colours',
     type: 'colour',
     title: 'Colors',
+    display: true,
   }, {
     id: 'outputFormat',
     type: 'radio',
     title: 'Output format',
     optionsType: 'text',
     options: ['Hex', 'Rgba'],
+    display: true,
   }, {
     id: 'name',
     type: 'input',
     title: 'Template Name',
+    display: false,
   }, {
     id: 'author',
     type: 'input',
     title: 'Author',
+    display: false,
   },
   ];
 
   const initialValues = {
     name: 'Name your template',
     author: 'Your name or nickname',
-    style: 'linear',
+    style: 'Linear',
     direction: 'arrow-up-left',
     color1: '',
     color2: '',
-    outputFormat: 'hex',
+    outputFormat: 'Hex',
   };
 
   const internalCreateTemplate = async (values: Record<string, any>) => {

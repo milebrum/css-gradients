@@ -4,6 +4,7 @@ export interface FormField {
   title: string;
   optionsType?: string;
   options?: string[];
+  display: boolean;
 }
 
 export enum FormFieldType {
