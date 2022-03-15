@@ -35,7 +35,7 @@ const RadioButtons: React.FC<RadioButtonsProps> = (props) => {
     <>
       <h2>{title}</h2>
       <ToggleButtonGroup
-        className={styles.btnGroup}
+        className={styles.radioBtnBox}
         value={valueSelected}
         exclusive
         onChange={handleSelect}
