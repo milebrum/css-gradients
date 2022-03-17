@@ -1,0 +1,9 @@
+.colourBox {
+  display: flex;
+  gap: 10px;
+}
+
+.colourBtn {
+  width: 80px;
+  height: 32px;
+}

@@ -6,7 +6,7 @@ import {
 import { Box, Button } from '@mui/material';
 import styles from './CustomForm.module.css';
 import { FormField, FormFieldType } from '../template/types';
-import { ColourButton, InputField, RadioButtons } from '.';
+import { ColourButtons, InputField, RadioButtons } from '.';
 
 interface FormProps {
   onComplete: (values: Record<string, any>) => void;
@@ -57,6 +57,7 @@ const CustomForm: React.FC<FormProps> = (props) => {
               radioButtons={formField.options}
               initialValue={initialValues[formField.id]}
               setFieldValue={setFieldValue}
+              // in case you don't want a pre-selected value
               errors={errors}
               touched={touched}
             />
@@ -79,8 +80,11 @@ const CustomForm: React.FC<FormProps> = (props) => {
       case FormFieldType.COLOUR:
         return (
           <Box className={styles.formSection} key={formField.id}>
-            <ColourButton
+            <ColourButtons
+              name={formField.id}
               title={formField.title}
+              initialValue={initialValues[formField.id]}
+              setFieldValue={setFieldValue}
             />
           </Box>
         );
