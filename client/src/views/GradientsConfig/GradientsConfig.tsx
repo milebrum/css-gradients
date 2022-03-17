@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import Sidebar from '../../components';
 import { CustomForm, PrimaryButton } from '../../components/common';
 import { Footer, Header } from '../../components/Layout';
+import randomColour from '../../helpers/utils';
 
 const Config: React.FC<{}> = () => {
   const gradientOptions = [{
@@ -51,8 +52,7 @@ const Config: React.FC<{}> = () => {
     author: '',
     style: 'Linear',
     direction: 'arrow-up-left',
-    color1: '',
-    color2: '',
+    colours: [`#${randomColour()}`, `#${randomColour()}`],
     outputFormat: 'Hex',
   };
 
@@ -67,8 +67,7 @@ const Config: React.FC<{}> = () => {
       author: values.author,
       style: values.style,
       direction: values.direction,
-      color1: values.color1,
-      color2: values.color2,
+      colours: values.colours,
       outputFormat: values.outputFormat,
     };
     console.log(templateData);

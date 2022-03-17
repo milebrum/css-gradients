@@ -1,8 +1,8 @@
 import About from './AboutPage/AboutPage';
-import Config from './Config/Config';
 import Display from './Display/Display';
+import GradientsConfig from './GradientsConfig/GradientsConfig';
 import Templates from './TemplatesPage/TemplatesPage';
 
 export {
-  About, Display, Templates, Config,
+  About, Display, Templates, GradientsConfig,
 };

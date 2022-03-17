@@ -3,13 +3,13 @@ import { ThemeProvider } from '@mui/material';
 import Theme from './styles/theme/material-theme';
 import { Layout } from './components/Layout';
 import {
-  About, Config, Display, Templates,
+  About, GradientsConfig, Display, Templates,
 } from './views';
 
 const App: React.FC<{}> = () => (
   <ThemeProvider theme={Theme}>
     <Layout>
-      <Config />
+      <GradientsConfig />
       <Display />
       <Templates />
       <About />
