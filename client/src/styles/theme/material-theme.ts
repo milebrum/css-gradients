@@ -15,7 +15,7 @@ const Theme = createTheme({
       styleOverrides: {
         root: {
           width: '100%',
-          height: '48px',
+          height: '42px',
           background: '#f1f4f8',
           borderRadius: '6px',
           fontFamily: 'Poppins, sans-serif',

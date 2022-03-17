@@ -13,10 +13,10 @@ body {
 
 h1 {
   text-transform: uppercase;
-  font-size: 1.5rem;
-  line-height: 1.75rem;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
   width: 140px;
-  margin-bottom: 14px;
+  margin: 0;
 }
 
 h2 {
@@ -33,4 +33,8 @@ code {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+p {
+  font-size: 12px;
 }

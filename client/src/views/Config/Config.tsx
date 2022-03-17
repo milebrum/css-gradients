@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import Sidebar from '../../components';
-import { ColourSelector, CustomForm, PrimaryButton } from '../../components/common';
+import { CustomForm, PrimaryButton } from '../../components/common';
 import { Footer, Header } from '../../components/Layout';
 
 const Config: React.FC<{}> = () => {
@@ -76,13 +76,13 @@ const Config: React.FC<{}> = () => {
   };
 
   const sidebarElements = [
-    <Header key="Header" />,
+    <Header key="textLogo" />,
     <PrimaryButton
-      key="PrimaryButton"
+      key="loadTemplate"
       label="Load from template"
     />,
     <CustomForm
-      key="CustomForm"
+      key="configForm"
       onComplete={(values: any) => {
         internalCreateTemplate(values);
       }}
@@ -91,8 +91,15 @@ const Config: React.FC<{}> = () => {
       initialValues={initialValues}
       validationSchema={validationSchema}
     />,
-    <ColourSelector key="ColourSelector" />,
-    <Footer key="Footer" />,
+    <PrimaryButton
+      key="getCSS"
+      label="Get CSS"
+    />,
+    <PrimaryButton
+      key="getShareLink"
+      label="Get share link"
+    />,
+    <Footer key="signature" />,
   ];
 
   return (

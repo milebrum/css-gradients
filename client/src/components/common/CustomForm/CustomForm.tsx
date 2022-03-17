@@ -91,7 +91,6 @@ const CustomForm: React.FC<FormProps> = (props) => {
 
   return (
     <Formik
-      enableReinitialize
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting }) => {

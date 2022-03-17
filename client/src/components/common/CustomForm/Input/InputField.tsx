@@ -33,6 +33,7 @@ const InputField: React.FC<InputFieldProps> = (props) => {
         id="outlined-basic"
         name={name}
         variant="outlined"
+        size="small"
         className={styles.class}
         label={label}
         value={value}
