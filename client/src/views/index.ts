@@ -1,5 +1,8 @@
 import About from './AboutPage/AboutPage';
-import Display from './DisplayPage/DisplayPage';
+import Config from './Config/Config';
+import Display from './Display/Display';
 import Templates from './TemplatesPage/TemplatesPage';
 
-export { About, Display, Templates };
+export {
+  About, Display, Templates, Config,
+};
