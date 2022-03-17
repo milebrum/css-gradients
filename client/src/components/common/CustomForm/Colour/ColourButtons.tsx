@@ -18,8 +18,12 @@ const ColourButtons: React.FC<ColourButtonsProps> = (props) => {
   const [colourValues, setColourValues] = React.useState(initialValue);
 
   const setRandomColours = () => {
-    setFieldValue(name, [`#${randomColour()}`, `#${randomColour()}`]);
-    setColourValues([`#${randomColour()}`, `#${randomColour()}`]);
+    const newColourValues:string[] = [];
+    colourValues.forEach(() => {
+      newColourValues.push(`#${randomColour()}`);
+    });
+    setFieldValue(name, newColourValues);
+    setColourValues(newColourValues);
   };
 
   return (
