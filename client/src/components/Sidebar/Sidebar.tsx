@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Yup from 'yup';
 import { ColourSelector, CustomForm, PrimaryButton } from '../common';
 import { Footer, Header } from '../Layout';
 import styles from './Sidebar.module.css';
@@ -34,24 +35,31 @@ const Sidebar: React.FC<{}> = () => {
     id: 'name',
     type: 'input',
     title: 'Template Name',
+    label: 'Name your template',
     display: false,
   }, {
     id: 'author',
     type: 'input',
     title: 'Author',
+    label: 'Your name or nickname',
     display: false,
   },
   ];
 
   const initialValues = {
-    name: 'Name your template',
-    author: 'Your name or nickname',
+    name: '',
+    author: '',
     style: 'Linear',
     direction: 'arrow-up-left',
     color1: '',
     color2: '',
     outputFormat: 'Hex',
   };
+
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required('This field is required'),
+    author: Yup.string().required('This field is required'),
+  });
 
   const internalCreateTemplate = async (values: Record<string, any>) => {
     const templateData = {
@@ -63,7 +71,7 @@ const Sidebar: React.FC<{}> = () => {
       color2: values.color2,
       outputFormat: values.outputFormat,
     };
-    return templateData;
+    console.log(templateData);
     // createTemplate(templateData);
   };
 
@@ -80,6 +88,7 @@ const Sidebar: React.FC<{}> = () => {
         formFields={gradientOptions}
         submitLabel="Save as template"
         initialValues={initialValues}
+        validationSchema={validationSchema}
       />
       <ColourSelector />
       <Footer />

@@ -1,27 +1,32 @@
 import React from 'react';
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
-// import { IconName } from '@fortawesome/fontawesome-svg-core';
+import { FormikErrors, FormikTouched } from 'formik';
 import { RadioButtonType } from '../../template/types';
 import styles from './RadioButtons.module.css';
 import DirectionIcons from '../../template/DirectionIcons';
 
 interface RadioButtonsProps {
+  name: string;
   title: string;
   type: string;
   radioButtons: string[];
-  initialValue: string;
+  initialValue: any;
+  setFieldValue: (field: string, value: any) => void;
+  errors: FormikErrors<any>;
+  touched: FormikTouched<any>;
 }
 
 const RadioButtons: React.FC<RadioButtonsProps> = (props) => {
   const {
-    title, type, radioButtons, initialValue,
+    name, title, type, radioButtons, initialValue, setFieldValue, errors, touched,
   } = props;
-  const [valueSelected, setValueSelected] = React.useState(initialValue);
+  const [value, setValue] = React.useState(initialValue);
 
   // value selector buttons
   const handleSelect = (event: React.MouseEvent<HTMLElement>, newSelected: string) => {
-    if (newSelected !== null && newSelected !== valueSelected) {
-      setValueSelected(newSelected);
+    if (newSelected !== null && newSelected !== value) {
+      setFieldValue(name, newSelected);
+      setValue(newSelected);
     }
   };
 
@@ -36,7 +41,7 @@ const RadioButtons: React.FC<RadioButtonsProps> = (props) => {
       <h2>{title}</h2>
       <ToggleButtonGroup
         className={styles.radioBtnBox}
-        value={valueSelected}
+        value={value}
         exclusive
         onChange={handleSelect}
         aria-label={`${title} options`}
@@ -45,19 +50,25 @@ const RadioButtons: React.FC<RadioButtonsProps> = (props) => {
           (button) => (
             <ToggleButton
               key={button}
+              name={name}
+              color={errors[name] && touched[name] ? 'error' : 'standard'}
               value={button}
               aria-label={button}
               className={styles.radioBtn}
             >
               {type === RadioButtonType.TEXT ? (
                 button
-              ) : type === RadioButtonType.ICON && (
-                DirectionIcons(button)
-              )}
+              ) : (
+                type === RadioButtonType.ICON && (
+                  DirectionIcons(button)
+                ))}
             </ToggleButton>
           ),
         )}
       </ToggleButtonGroup>
+      {errors[name] && touched[name] && (
+        <div className={styles.error}>{errors.name}</div>
+      )}
     </>
   );
 };

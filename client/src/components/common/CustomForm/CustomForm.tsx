@@ -1,6 +1,8 @@
 import React from 'react';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
+import { InferType, BaseSchema } from 'yup';
+import {
+  Formik, Form, FormikErrors, FormikTouched,
+} from 'formik';
 import { Box, Button } from '@mui/material';
 import styles from './CustomForm.module.css';
 import { FormField, FormFieldType } from '../template/types';
@@ -11,11 +13,12 @@ interface FormProps {
   formFields: FormField[];
   submitLabel: string;
   initialValues: Record<string, any>;
+  validationSchema: InferType<BaseSchema>;
 }
 
 const CustomForm: React.FC<FormProps> = (props) => {
   const {
-    onComplete, formFields, submitLabel, initialValues,
+    onComplete, formFields, submitLabel, initialValues, validationSchema,
   } = props;
   const [areHiddenFields, setAreHiddenFields] = React.useState(false);
   const [hiddenFields, setHiddenFields] = React.useState<FormField[]>([]);
@@ -37,29 +40,48 @@ const CustomForm: React.FC<FormProps> = (props) => {
     setAreHiddenFields(false);
   };
 
-  const renderFields = (formField: FormField) => {
+  const renderFields = (
+    formField: FormField,
+    setFieldValue: any,
+    errors: FormikErrors<any>,
+    touched: FormikTouched<any>,
+  ) => {
     switch (formField.type) {
       case FormFieldType.RADIO:
         return formField.optionsType && formField.options && (
           <Box className={styles.formSection} key={formField.id}>
             <RadioButtons
+              name={formField.id}
               title={formField.title}
               type={formField.optionsType}
               radioButtons={formField.options}
               initialValue={initialValues[formField.id]}
+              setFieldValue={setFieldValue}
+              errors={errors}
+              touched={touched}
             />
           </Box>
         );
       case FormFieldType.INPUT:
-        return (
+        return formField.label && (
           <Box className={styles.formSection} key={formField.id}>
-            <InputField title={formField.title} />
+            <InputField
+              name={formField.id}
+              title={formField.title}
+              label={formField.label}
+              initialValue={initialValues[formField.id]}
+              setFieldValue={setFieldValue}
+              errors={errors}
+              touched={touched}
+            />
           </Box>
         );
       case FormFieldType.COLOUR:
         return (
           <Box className={styles.formSection} key={formField.id}>
-            <ColourButton title={formField.title} />
+            <ColourButton
+              title={formField.title}
+            />
           </Box>
         );
       default:
@@ -67,31 +89,29 @@ const CustomForm: React.FC<FormProps> = (props) => {
     }
   };
 
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().required('This field is required'),
-    author: Yup.string().required('This field is required'),
-  });
-
   return (
     <Formik
+      enableReinitialize
       initialValues={initialValues}
+      validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(true);
         onComplete(values);
       }}
-      validationSchema={validationSchema}
     >
-      <Form className={styles.form}>
-        {formFields.map((formField) => (
-          formField.display && renderFields(formField)
-        ))}
-        {hiddenFields.map((hiddenField) => (
-          renderFields(hiddenField)
-        ))}
-        <Button type={areHiddenFields ? 'button' : 'submit'} onClick={() => areHiddenFields && showHiddenFields()}>
-          {submitLabel}
-        </Button>
-      </Form>
+      {({ setFieldValue, errors, touched }) => (
+        <Form className={styles.form}>
+          {formFields.map((formField) => (
+            formField.display && renderFields(formField, setFieldValue, errors, touched)
+          ))}
+          {hiddenFields.map((hiddenField) => (
+            renderFields(hiddenField, setFieldValue, errors, touched)
+          ))}
+          <Button type="submit" onClick={() => areHiddenFields && showHiddenFields()}>
+            {submitLabel}
+          </Button>
+        </Form>
+      )}
     </Formik>
   );
 };
