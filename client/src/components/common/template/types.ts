@@ -8,6 +8,11 @@ export interface FormField {
   display: boolean;
 }
 
+export interface ConfigColourSelector {
+  isOpen: boolean;
+  where?: DOMRect;
+}
+
 export enum FormFieldType {
   RADIO = 'radio',
   INPUT = 'input',

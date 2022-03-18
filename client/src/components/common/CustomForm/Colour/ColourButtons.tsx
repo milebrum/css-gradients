@@ -3,6 +3,7 @@ import { Box, Button } from '@mui/material';
 import styles from './ColourButtons.module.css';
 import ColourSelector from '../../ColourSelector/ColourSelector';
 import randomColour from '../../../../helpers/utils';
+import { ConfigColourSelector } from '../../template/types';
 
 interface ColourButtonsProps {
   name: string;
@@ -16,9 +17,13 @@ const ColourButtons: React.FC<ColourButtonsProps> = (props) => {
     name, title, initialValue, setFieldValue,
   } = props;
   const [colourValues, setColourValues] = React.useState(initialValue);
+  const
+    [configColourSelector, setConfigColourSelector] = React.useState<ConfigColourSelector>(
+      { isOpen: false },
+    );
 
   const setRandomColours = () => {
-    const newColourValues:string[] = [];
+    const newColourValues: string[] = [];
     colourValues.forEach(() => {
       newColourValues.push(`#${randomColour()}`);
     });
@@ -37,11 +42,19 @@ const ColourButtons: React.FC<ColourButtonsProps> = (props) => {
             value={value}
             className={styles.colourBtn}
             style={{ background: value }}
+            onClick={(e: React.MouseEvent<HTMLElement>) => setConfigColourSelector(
+              { isOpen: true, where: e.currentTarget.getBoundingClientRect() },
+            )}
           />
         ))}
         <Button className={styles.colourBtn} onClick={() => setRandomColours()}>Random</Button>
       </Box>
-      <ColourSelector />
+      {configColourSelector.isOpen && (
+        <ColourSelector
+          configColourSelector={configColourSelector}
+          setConfigColourSelector={setConfigColourSelector}
+        />
+      )}
     </>
   );
 };
