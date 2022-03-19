@@ -1,4 +1,4 @@
-export interface FormField {
+export interface ConfigFormField {
   id: string;
   type: string;
   title: string;
@@ -11,6 +11,7 @@ export interface FormField {
 export interface ConfigColourSelector {
   isOpen: boolean;
   where?: DOMRect;
+  color?: string;
 }
 
 export enum FormFieldType {

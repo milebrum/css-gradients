@@ -1,22 +1,21 @@
-import React from 'react';
+import React, { SetStateAction } from 'react';
 import { Box, Button } from '@mui/material';
 import styles from './ColourButtons.module.css';
-import ColourSelector from '../../ColourSelector/ColourSelector';
-import randomColour from '../../../../helpers/utils';
-import { ConfigColourSelector } from '../../template/types';
+import ColourSelector from '../../../ColourSelector/ColourSelector';
+import randomColour from '../../../../../helpers/utils';
+import { ConfigColourSelector } from '../../../template/types';
 
 interface ColourButtonsProps {
   name: string;
-  title: string;
-  initialValue: string[];
-  setFieldValue: (field: string, value: any) => void;
+  colourValues: string[];
+  setValue: React.Dispatch<SetStateAction<any>>;
+  isError: boolean;
 }
 
 const ColourButtons: React.FC<ColourButtonsProps> = (props) => {
   const {
-    name, title, initialValue, setFieldValue,
+    name, colourValues, setValue, isError,
   } = props;
-  const [colourValues, setColourValues] = React.useState(initialValue);
   const
     [configColourSelector, setConfigColourSelector] = React.useState<ConfigColourSelector>(
       { isOpen: false },
@@ -27,23 +26,21 @@ const ColourButtons: React.FC<ColourButtonsProps> = (props) => {
     colourValues.forEach(() => {
       newColourValues.push(`#${randomColour()}`);
     });
-    setFieldValue(name, newColourValues);
-    setColourValues(newColourValues);
+    setValue(newColourValues);
   };
 
   return (
     <>
-      <h2 className={styles.btn}>{title}</h2>
       <Box className={styles.colourBox}>
         {colourValues.map((value) => (
           <Button
             key={value}
             name={name}
             value={value}
-            className={styles.colourBtn}
+            className={`${styles.colourBtn} ${isError && styles.error}`}
             style={{ background: value }}
             onClick={(e: React.MouseEvent<HTMLElement>) => setConfigColourSelector(
-              { isOpen: true, where: e.currentTarget.getBoundingClientRect() },
+              { isOpen: true, where: e.currentTarget.getBoundingClientRect(), color: value },
             )}
           />
         ))}
