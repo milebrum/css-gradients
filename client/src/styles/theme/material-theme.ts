@@ -5,6 +5,7 @@ const Theme = createTheme({
     MuiToggleButton: {
       styleOverrides: {
         root: {
+          zIndex: 2,
           '&.Mui-selected': {
             backgroundColor: '#f1f4f8;',
           },
@@ -24,6 +25,14 @@ const Theme = createTheme({
           textTransform: 'capitalize',
           fontSize: '.8125rem',
           lineHeight: '3rem',
+          zIndex: 2,
+        },
+      },
+    },
+    MuiFormLabel: {
+      styleOverrides: {
+        root: {
+          minWidth: '100%',
         },
       },
     },

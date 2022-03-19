@@ -1,4 +1,4 @@
-import React, { SetStateAction } from 'react';
+import React from 'react';
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { RadioButtonType } from '../../../template/types';
 import styles from './RadioButtons.module.css';
@@ -9,19 +9,19 @@ interface RadioButtonsProps {
   type: string;
   radioButtons: string[];
   value: string;
-  setValue: React.Dispatch<SetStateAction<any>>;
+  handleChange: (e: React.MouseEvent<HTMLElement>, newValue: string) => void;
   isError: boolean;
 }
 
 const RadioButtons: React.FC<RadioButtonsProps> = (props) => {
   const {
-    name, type, radioButtons, value, setValue, isError,
+    name, type, radioButtons, value, handleChange, isError,
   } = props;
 
   // value selector buttons
-  const handleSelect = (event: React.MouseEvent<HTMLElement>, newSelected: string) => {
+  const handleSelect = (e: React.MouseEvent<HTMLElement>, newSelected: string) => {
     if (newSelected !== null) {
-      setValue(newSelected);
+      handleChange(e, newSelected);
     }
   };
 

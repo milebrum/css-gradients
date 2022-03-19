@@ -1,3 +1,8 @@
+export interface ConfigPopover {
+  isOpen: boolean;
+  where?: DOMRect;
+  content: any[];
+}
 export interface ConfigFormField {
   id: string;
   type: string;
@@ -6,12 +11,7 @@ export interface ConfigFormField {
   options?: string[];
   label?: string;
   display: boolean;
-}
-
-export interface ConfigColourSelector {
-  isOpen: boolean;
-  where?: DOMRect;
-  color?: string;
+  popover?: ConfigPopover;
 }
 
 export enum FormFieldType {

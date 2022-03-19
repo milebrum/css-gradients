@@ -1,20 +1,20 @@
 import { TextField } from '@mui/material';
 import { FormikErrors } from 'formik';
-import React, { SetStateAction } from 'react';
+import React from 'react';
 import styles from './InputField.module.css';
 
 interface InputFieldProps {
   name: string;
   label: string;
   value: string;
-  setValue: React.Dispatch<SetStateAction<any>>;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>, newValue: string) => void;
   isError: boolean;
   helperText?: string | FormikErrors<any> | string[] | FormikErrors<any>[];
 }
 
 const InputField: React.FC<InputFieldProps> = (props) => {
   const {
-    name, label, value, setValue, isError, helperText,
+    name, label, value, handleChange, isError, helperText,
   } = props;
 
   return (
@@ -28,7 +28,7 @@ const InputField: React.FC<InputFieldProps> = (props) => {
       className={styles.input}
       label={label}
       value={value}
-      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, e.target.value)}
     />
   );
 };

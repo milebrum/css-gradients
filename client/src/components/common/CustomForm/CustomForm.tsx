@@ -1,8 +1,6 @@
 import React from 'react';
 import { InferType, BaseSchema } from 'yup';
-import {
-  Formik, Form, FormikErrors, FormikTouched,
-} from 'formik';
+import { Formik, Form } from 'formik';
 import { Button } from '@mui/material';
 import styles from './CustomForm.module.css';
 import { ConfigFormField } from '../template/types';
@@ -30,23 +28,6 @@ const CustomForm: React.FC<FormProps> = (props) => {
     });
   }, [formFields]);
 
-  const renderField = (
-    formField: ConfigFormField,
-    setFieldValue: any,
-    errors: FormikErrors<any>,
-    touched: FormikTouched<any>,
-  ) => (
-    <FormField
-      key={formField.id}
-      hiddenFields={hiddenFields}
-      formField={formField}
-      initialValue={initialValues[formField.id]}
-      setFieldValue={setFieldValue}
-      errors={errors}
-      touched={touched}
-    />
-  );
-
   return (
     <Formik
       initialValues={initialValues}
@@ -59,7 +40,15 @@ const CustomForm: React.FC<FormProps> = (props) => {
       {({ setFieldValue, errors, touched }) => (
         <Form className={styles.form}>
           {formFields.map((formField) => (
-            renderField(formField, setFieldValue, errors, touched)
+            <FormField
+              key={formField.id}
+              hiddenFields={hiddenFields}
+              formField={formField}
+              initialValue={initialValues[formField.id]}
+              setFieldValue={setFieldValue}
+              errors={errors}
+              touched={touched}
+            />
           ))}
           <Button type="submit" onClick={() => hiddenFields && setHiddenFields(false)}>
             {submitLabel}

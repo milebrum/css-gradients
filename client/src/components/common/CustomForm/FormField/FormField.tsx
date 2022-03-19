@@ -2,7 +2,8 @@ import { Box } from '@mui/material';
 import { FormikErrors, FormikTouched } from 'formik';
 import React from 'react';
 import { ColourButtons, InputField, RadioButtons } from '..';
-import { ConfigFormField, FormFieldType } from '../../template/types';
+import CustomPopover from '../../button/CustomPopover/CustomPopover';
+import { ConfigFormField, ConfigPopover, FormFieldType } from '../../template/types';
 import styles from './FormField.module.css';
 
 interface FormFieldProps {
@@ -20,10 +21,33 @@ const FormField: React.FC<FormFieldProps> = (props) => {
   } = props;
   const [value, setValue] = React.useState(initialValue);
   const isError = !!errors[formField.id] && !!touched[formField.id];
+  const [configPopover, setConfigPopover] = React.useState<ConfigPopover>();
+
+  React.useEffect(() => {
+    if (formField.popover) {
+      setConfigPopover(formField.popover);
+    }
+  }, []);
 
   React.useEffect(() => {
     setFieldValue(formField.id, value);
   }, [value]);
+
+  const handleChange = (
+    e: React.SyntheticEvent<HTMLElement> | null,
+    newValue: string | string[],
+  ) => {
+    if (configPopover && e) {
+      setConfigPopover(
+        {
+          isOpen: true,
+          where: e.currentTarget.getBoundingClientRect(),
+          content: configPopover.content,
+        },
+      );
+    }
+    setValue(newValue);
+  };
 
   const renderByType = () => {
     switch (formField.type) {
@@ -34,7 +58,7 @@ const FormField: React.FC<FormFieldProps> = (props) => {
             type={formField.optionsType}
             radioButtons={formField.options}
             value={value}
-            setValue={setValue}
+            handleChange={handleChange}
             isError={isError}
           />
         );
@@ -44,7 +68,7 @@ const FormField: React.FC<FormFieldProps> = (props) => {
             name={formField.id}
             label={formField.label}
             value={value}
-            setValue={setValue}
+            handleChange={handleChange}
             isError={isError}
             helperText={errors[formField.id]}
           />
@@ -54,7 +78,7 @@ const FormField: React.FC<FormFieldProps> = (props) => {
           <ColourButtons
             name={formField.id}
             colourValues={value}
-            setValue={setValue}
+            handleChange={handleChange}
             isError={isError}
           />
         );
@@ -74,6 +98,12 @@ const FormField: React.FC<FormFieldProps> = (props) => {
         )}
         {isError && formField.type !== FormFieldType.INPUT && (
           <Box className={styles.error}>{errors[formField.id]}</Box>
+        )}
+        {configPopover?.isOpen && (
+          <CustomPopover
+            configPopover={configPopover}
+            setConfigPopover={setConfigPopover}
+          />
         )}
       </>
     </Box>

@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import Sidebar from '../../components';
-import { CustomForm, PrimaryButton } from '../../components/common';
+import { ColourSelector, CustomForm, PrimaryButton } from '../../components/common';
 import { Footer, Header } from '../../components/Layout';
 import randomColour from '../../helpers/utils';
 
@@ -25,6 +25,7 @@ const Config: React.FC<{}> = () => {
     type: 'colour',
     title: 'Colors',
     display: true,
+    popover: { isOpen: false, content: [<ColourSelector key="colourSelector" />] },
   }, {
     id: 'outputFormat',
     type: 'radio',
