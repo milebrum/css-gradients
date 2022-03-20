@@ -7,7 +7,6 @@ export interface ConfigFormField {
   id: string;
   type: string;
   title: string;
-  optionsType?: string;
   options?: string[];
   label?: string;
   display: boolean;
@@ -27,19 +26,24 @@ export enum FormFieldType {
   COLOUR = 'colour',
 }
 
-export enum RadioButtonType {
-  TEXT = 'text',
-  ICON = 'icon',
+export enum StyleType {
+  LINEAR = 'linear-gradient',
+  RADIAL = '-webkit-radial-gradient',
 }
 
 export enum DirectionIconsType {
-  ARROW_UP_LEFT = 'arrow-up-left',
-  ARROW_UP = 'arrow-up',
-  ARROW_UP_RIGHT = 'arrow-up-right',
-  ARROW_LEFT = 'arrow-left',
-  CIRCLE_MIDDLE = 'circle_middle',
-  ARROW_RIGHT = 'arrow-right',
-  ARROW_DOWN_LEFT = 'arrow-down-left',
-  ARROW_DOWN = 'arrow-down',
-  ARROW_DOWN_RIGHT = 'arrow-down-right',
+  LEFT_TOP = 'to left top',
+  TOP = 'to top',
+  RIGHT_TOP = 'to right top',
+  LEFT = 'to left',
+  CENTER = 'at center center',
+  RIGHT = 'to right',
+  LEFT_BOTTOM = 'to left bottom',
+  BOTTOM = 'to bottom',
+  RIGHT_BOTTOM = 'to right bottom',
+}
+
+export enum CopyToClipboardType {
+  CSS = 'CSS',
+  SHARE_LINK = 'shareLink'
 }

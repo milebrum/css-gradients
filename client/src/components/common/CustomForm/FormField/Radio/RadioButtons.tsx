@@ -1,12 +1,10 @@
 import React from 'react';
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
-import { RadioButtonType } from '../../../template/types';
 import styles from './RadioButtons.module.css';
-import DirectionIcons from '../../../template/DirectionIcons';
+import showGradientOptions from '../../../template/ShowGradientOptions';
 
 interface RadioButtonsProps {
   name: string;
-  type: string;
   radioButtons: string[];
   value: string;
   handleChange: (e: React.MouseEvent<HTMLElement>, newValue: string) => void;
@@ -15,7 +13,7 @@ interface RadioButtonsProps {
 
 const RadioButtons: React.FC<RadioButtonsProps> = (props) => {
   const {
-    name, type, radioButtons, value, handleChange, isError,
+    name, radioButtons, value, handleChange, isError,
   } = props;
 
   // value selector buttons
@@ -48,12 +46,11 @@ const RadioButtons: React.FC<RadioButtonsProps> = (props) => {
             aria-label={button}
             className={styles.radioBtn}
           >
-            {type === RadioButtonType.TEXT ? (
+            {name === 'outputFormat' ? (
               button
             ) : (
-              type === RadioButtonType.ICON && (
-                DirectionIcons(button)
-              ))}
+              showGradientOptions(button)
+            )}
           </ToggleButton>
         ),
       )}

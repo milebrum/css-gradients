@@ -1,9 +1,13 @@
 import * as React from 'react';
-import { DirectionIconsType } from './types';
+import { DirectionIconsType, StyleType } from './types';
 
-const DirectionIcons = (icon: string) => {
-  switch (icon) {
-    case DirectionIconsType.ARROW_UP_LEFT:
+const ShowGradientOptions = (option: string) => {
+  switch (option) {
+    case StyleType.LINEAR:
+      return 'Linear';
+    case StyleType.RADIAL:
+      return 'Radial';
+    case DirectionIconsType.LEFT_TOP:
       return (
         <svg
           id="icn"
@@ -16,7 +20,7 @@ const DirectionIcons = (icon: string) => {
           />
         </svg>
       );
-    case DirectionIconsType.ARROW_UP:
+    case DirectionIconsType.TOP:
       return (
         <svg
           id="icn"
@@ -29,7 +33,7 @@ const DirectionIcons = (icon: string) => {
           />
         </svg>
       );
-    case DirectionIconsType.ARROW_UP_RIGHT:
+    case DirectionIconsType.RIGHT_TOP:
       return (
         <svg
           id="icn"
@@ -42,7 +46,7 @@ const DirectionIcons = (icon: string) => {
           />
         </svg>
       );
-    case DirectionIconsType.ARROW_LEFT:
+    case DirectionIconsType.LEFT:
       return (
         <svg
           id="icn"
@@ -55,7 +59,7 @@ const DirectionIcons = (icon: string) => {
           />
         </svg>
       );
-    case DirectionIconsType.CIRCLE_MIDDLE:
+    case DirectionIconsType.CENTER:
       return (
         <svg
           id="icn"
@@ -74,7 +78,7 @@ const DirectionIcons = (icon: string) => {
           />
         </svg>
       );
-    case DirectionIconsType.ARROW_RIGHT:
+    case DirectionIconsType.RIGHT:
       return (
         <svg
           id="icn"
@@ -87,7 +91,7 @@ const DirectionIcons = (icon: string) => {
           />
         </svg>
       );
-    case DirectionIconsType.ARROW_DOWN_LEFT:
+    case DirectionIconsType.LEFT_BOTTOM:
       return (
         <svg
           id="icn"
@@ -100,7 +104,7 @@ const DirectionIcons = (icon: string) => {
           />
         </svg>
       );
-    case DirectionIconsType.ARROW_DOWN:
+    case DirectionIconsType.BOTTOM:
       return (
         <svg
           id="icn"
@@ -113,7 +117,7 @@ const DirectionIcons = (icon: string) => {
           />
         </svg>
       );
-    case DirectionIconsType.ARROW_DOWN_RIGHT:
+    case DirectionIconsType.RIGHT_BOTTOM:
       return (
         <svg
           id="icn"
@@ -131,4 +135,4 @@ const DirectionIcons = (icon: string) => {
   }
 };
 
-export default DirectionIcons;
+export default ShowGradientOptions;

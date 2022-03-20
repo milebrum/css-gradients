@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { FormikErrors, FormikTouched } from 'formik';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { ColourButtons, InputField, RadioButtons } from '..';
 import { gradientActions } from '../../../../redux/store/gradientSlice';
 import CustomPopover from '../../button/CustomPopover/CustomPopover';
@@ -28,7 +28,6 @@ const FormField: React.FC<FormFieldProps> = (props) => {
   const [configPopover, setConfigPopover] = React.useState<ConfigPopover>();
 
   const dispatch = useDispatch();
-  const gradient = useSelector((state: any) => state.gradient);
 
   React.useEffect(() => {
     if (formField.popover) {
@@ -38,7 +37,6 @@ const FormField: React.FC<FormFieldProps> = (props) => {
 
   React.useEffect(() => {
     setFieldValue(formField.id, value);
-    console.log(gradient);
   }, [value]);
 
   const handleChange = (
@@ -77,10 +75,9 @@ const FormField: React.FC<FormFieldProps> = (props) => {
   const renderByType = () => {
     switch (formField.type) {
       case FormFieldType.RADIO:
-        return formField.optionsType && formField.options && (
+        return formField.options && (
           <RadioButtons
             name={formField.id}
-            type={formField.optionsType}
             radioButtons={formField.options}
             value={value}
             handleChange={handleChange}
