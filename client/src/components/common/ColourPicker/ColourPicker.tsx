@@ -24,8 +24,9 @@ const ColourPicker: React.FC<ColourPickerProps> = (props) => {
   }, [configPopover]);
 
   React.useEffect(() => {
-    colourValues.splice(spliceStart, 1, colourSelected);
-    handleChange(null, colourValues);
+    const splicedColours = [...colourValues];
+    splicedColours.splice(spliceStart, 1, colourSelected);
+    handleChange(null, splicedColours);
   }, [colourSelected]);
 
   return (
