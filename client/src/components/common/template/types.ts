@@ -1,7 +1,7 @@
 export interface ConfigPopover {
   isOpen: boolean;
   where?: DOMRect;
-  content: any[];
+  content?: string;
 }
 export interface ConfigFormField {
   id: string;

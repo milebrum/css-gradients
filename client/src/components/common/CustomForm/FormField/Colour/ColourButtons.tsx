@@ -6,7 +6,11 @@ import randomColour from '../../../../../helpers/utils';
 interface ColourButtonsProps {
   name: string;
   colourValues: string[];
-  handleChange: (e: React.MouseEvent<HTMLElement> | null, newValue: string[]) => void;
+  handleChange: (
+    e: React.MouseEvent<HTMLElement> | null,
+    newValue: string[],
+    popoverContent?: string
+  ) => void;
   isError: boolean;
 }
 
@@ -32,7 +36,9 @@ const ColourButtons: React.FC<ColourButtonsProps> = (props) => {
           value={value}
           className={`${styles.colourBtn} ${isError && styles.error}`}
           style={{ background: value }}
-          onClick={(e: React.MouseEvent<HTMLElement>) => handleChange(e, colourValues)}
+          onClick={(
+            e: React.MouseEvent<HTMLElement>,
+          ) => handleChange(e, colourValues, value)}
         />
       ))}
       <Button className={styles.colourBtn} onClick={() => setRandomColours()}>Random</Button>

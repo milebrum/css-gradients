@@ -1,18 +1,22 @@
 import { Box } from '@mui/material';
 import React, { SetStateAction } from 'react';
-import { ConfigPopover } from '../../template/types';
+import ColourPicker from '../../ColourPicker/ColourPicker';
+import { ConfigPopover, FormFieldType } from '../../template/types';
 import styles from './CustomPopover.module.css';
 
 interface CustomPopoverProps {
   configPopover: ConfigPopover;
   setConfigPopover: React.Dispatch<SetStateAction<ConfigPopover | undefined>>;
+  type: string;
+  value: string;
+  handleChange: (e: React.SyntheticEvent<HTMLElement> | null, newValue: string | string[]) => void;
+  colourValues?: string[];
 }
 
 const CustomPopover: React.FC<CustomPopoverProps> = (props) => {
   const {
-    configPopover, setConfigPopover,
+    configPopover, setConfigPopover, type, value, colourValues, handleChange,
   } = props;
-  const popoverContent = configPopover.content;
 
   const setPosition = () => {
     if (configPopover.where) {
@@ -32,13 +36,27 @@ const CustomPopover: React.FC<CustomPopoverProps> = (props) => {
     }
   };
 
+  const renderByType = () => {
+    switch (type) {
+      case FormFieldType.COLOUR:
+        return colourValues && (
+          <ColourPicker
+            colour={value}
+            handleChange={handleChange}
+            colourValues={colourValues}
+            configPopover={configPopover}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <Box className={styles.outsidePopover} role="button" onClick={() => close()} />
       <Box className={styles.popover} style={setPosition()} role="button" onClick={(e: React.MouseEvent<HTMLElement>) => close(e)}>
-        {popoverContent.map((content: any) => (
-          content
-        ))}
+        {renderByType()}
       </Box>
     </>
   );

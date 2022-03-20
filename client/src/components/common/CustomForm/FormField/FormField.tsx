@@ -36,16 +36,18 @@ const FormField: React.FC<FormFieldProps> = (props) => {
   const handleChange = (
     e: React.SyntheticEvent<HTMLElement> | null,
     newValue: string | string[],
+    popoverContent?: string,
   ) => {
     if (configPopover && e) {
       setConfigPopover(
         {
           isOpen: true,
           where: e.currentTarget.getBoundingClientRect(),
-          content: configPopover.content,
+          content: popoverContent,
         },
       );
     }
+    console.log(newValue);
     setValue(newValue);
   };
 
@@ -99,10 +101,14 @@ const FormField: React.FC<FormFieldProps> = (props) => {
         {isError && formField.type !== FormFieldType.INPUT && (
           <Box className={styles.error}>{errors[formField.id]}</Box>
         )}
-        {configPopover?.isOpen && (
+        {configPopover?.isOpen && configPopover?.content && (
           <CustomPopover
             configPopover={configPopover}
             setConfigPopover={setConfigPopover}
+            type={formField.type}
+            value={configPopover.content}
+            handleChange={handleChange}
+            colourValues={value}
           />
         )}
       </>
