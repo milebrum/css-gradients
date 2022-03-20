@@ -79,7 +79,6 @@ const FormField: React.FC<FormFieldProps> = (props) => {
           <RadioButtons
             name={formField.id}
             radioButtons={formField.options}
-            value={value}
             handleChange={handleChange}
             isError={isError}
           />

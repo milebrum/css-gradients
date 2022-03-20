@@ -30,7 +30,7 @@ const Config: React.FC<{}> = () => {
     id: 'outputFormat',
     type: 'radio',
     title: 'Output format',
-    options: ['Hex', 'Rgba'],
+    options: ['hex', 'rgba'],
     display: true,
   }, {
     id: 'name',

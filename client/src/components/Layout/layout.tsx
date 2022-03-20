@@ -24,7 +24,6 @@ const Layout: React.FC<{}> = (props) => {
   React.useEffect(() => {
     if (searchParams) {
       dispatch(gradientActions.setColours(colourValues));
-      console.log(colourValues);
     }
   }, [colourValues]);
 

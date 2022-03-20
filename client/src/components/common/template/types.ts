@@ -43,6 +43,11 @@ export enum DirectionIconsType {
   RIGHT_BOTTOM = 'to right bottom',
 }
 
+export enum OutputFormatType {
+  HEX = 'hex',
+  RGBA = 'rgba',
+}
+
 export enum CopyToClipboardType {
   CSS = 'CSS',
   SHARE_LINK = 'shareLink'

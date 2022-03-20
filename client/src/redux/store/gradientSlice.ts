@@ -6,7 +6,7 @@ const gradientInitialState = {
     style: 'linear-gradient',
     direction: 'to left top',
     colours: [`#${randomColour()}`, `#${randomColour()}`],
-    outputFormat: 'Hex',
+    outputFormat: 'hex',
   },
 };
 

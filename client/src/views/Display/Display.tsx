@@ -12,10 +12,6 @@ const Display: React.FC<{}> = () => {
     setGradientStyle(DisplayStyle(gradient));
   }, [gradient]);
 
-  React.useEffect(() => {
-    console.log(gradientStyle);
-  }, [gradientStyle]);
-
   return (
     <Box
       className={styles.root}

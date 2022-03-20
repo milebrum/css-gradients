@@ -3,27 +3,41 @@ import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { useSelector } from 'react-redux';
 import styles from './RadioButtons.module.css';
 import showGradientOptions from '../../../template/ShowGradientOptions';
-import { DirectionIconsType, StyleType } from '../../../template/types';
+import { DirectionIconsType, FormFieldOptions, StyleType } from '../../../template/types';
 
 interface RadioButtonsProps {
   name: string;
   radioButtons: string[];
-  value: string;
   handleChange: (e: React.MouseEvent<HTMLElement>, newValue: string) => void;
   isError: boolean;
 }
 
 const RadioButtons: React.FC<RadioButtonsProps> = (props) => {
   const {
-    name, radioButtons, value, handleChange, isError,
+    name, radioButtons, handleChange, isError,
   } = props;
 
   const gradientStyle = useSelector((state: any) => state.gradient.gradient.style);
+  const gradientDirection = useSelector((state: any) => state.gradient.gradient.direction);
+  const gradientOutput = useSelector((state: any) => state.gradient.gradient.outputFormat);
 
   // value selector buttons
   const handleSelect = (e: React.MouseEvent<HTMLElement>, newSelected: string) => {
     if (newSelected !== null) {
       handleChange(e, newSelected);
+    }
+  };
+
+  const setValue = () => {
+    switch (name) {
+      case FormFieldOptions.STYLE:
+        return gradientStyle;
+      case FormFieldOptions.DIRECTION:
+        return gradientDirection;
+      case FormFieldOptions.OUTPUT_FORMAT:
+        return gradientOutput;
+      default:
+        return null;
     }
   };
 
@@ -36,7 +50,7 @@ const RadioButtons: React.FC<RadioButtonsProps> = (props) => {
   return (
     <ToggleButtonGroup
       className={styles.radioBtnBox}
-      value={value}
+      value={setValue()}
       exclusive
       onChange={handleSelect}
     >
@@ -50,7 +64,7 @@ const RadioButtons: React.FC<RadioButtonsProps> = (props) => {
             aria-label={button}
             className={`${styles.radioBtn} ${gradientStyle === StyleType.LINEAR && button === DirectionIconsType.CENTER && styles.hidden}`}
           >
-            {name === 'outputFormat' ? (
+            {name === FormFieldOptions.OUTPUT_FORMAT ? (
               button
             ) : (
               showGradientOptions(button)
