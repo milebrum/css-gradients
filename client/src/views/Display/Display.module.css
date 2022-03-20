@@ -1,4 +1,3 @@
 .root {
-  width: auto;
-  height: 100vh;
+  flex: 1 1 auto;
 }

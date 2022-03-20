@@ -3,8 +3,8 @@ import randomColour from '../../helpers/utils';
 
 const gradientInitialState = {
   gradient: {
-    style: 'Linear',
-    direction: 'arrow-up-left',
+    style: 'linear-gradient',
+    direction: 'to left top',
     colours: [`#${randomColour()}`, `#${randomColour()}`],
     outputFormat: 'Hex',
   },
