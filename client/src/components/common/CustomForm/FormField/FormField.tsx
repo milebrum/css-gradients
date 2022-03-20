@@ -1,9 +1,13 @@
 import { Box } from '@mui/material';
 import { FormikErrors, FormikTouched } from 'formik';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { ColourButtons, InputField, RadioButtons } from '..';
+import { gradientActions } from '../../../../redux/store/gradientSlice';
 import CustomPopover from '../../button/CustomPopover/CustomPopover';
-import { ConfigFormField, ConfigPopover, FormFieldType } from '../../template/types';
+import {
+  ConfigFormField, ConfigPopover, FormFieldOptions, FormFieldType,
+} from '../../template/types';
 import styles from './FormField.module.css';
 
 interface FormFieldProps {
@@ -23,6 +27,9 @@ const FormField: React.FC<FormFieldProps> = (props) => {
   const isError = !!errors[formField.id] && !!touched[formField.id];
   const [configPopover, setConfigPopover] = React.useState<ConfigPopover>();
 
+  const dispatch = useDispatch();
+  const gradient = useSelector((state: any) => state.gradient);
+
   React.useEffect(() => {
     if (formField.popover) {
       setConfigPopover(formField.popover);
@@ -31,6 +38,7 @@ const FormField: React.FC<FormFieldProps> = (props) => {
 
   React.useEffect(() => {
     setFieldValue(formField.id, value);
+    console.log(gradient);
   }, [value]);
 
   const handleChange = (
@@ -47,8 +55,23 @@ const FormField: React.FC<FormFieldProps> = (props) => {
         },
       );
     }
-    console.log(newValue);
     setValue(newValue);
+    switch (formField.id) {
+      case FormFieldOptions.STYLE:
+        dispatch(gradientActions.setStyle(newValue));
+        break;
+      case FormFieldOptions.DIRECTION:
+        dispatch(gradientActions.setDirection(newValue));
+        break;
+      case FormFieldOptions.COLOURS:
+        dispatch(gradientActions.setColours(newValue));
+        break;
+      case FormFieldOptions.OUTPUT_FORMAT:
+        dispatch(gradientActions.setOutputFormat(newValue));
+        break;
+      default:
+        break;
+    }
   };
 
   const renderByType = () => {

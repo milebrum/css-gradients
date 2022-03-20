@@ -14,6 +14,13 @@ export interface ConfigFormField {
   popover?: ConfigPopover;
 }
 
+export enum FormFieldOptions {
+  STYLE = 'style',
+  DIRECTION = 'direction',
+  COLOURS = 'colours',
+  OUTPUT_FORMAT = 'outputFormat'
+}
+
 export enum FormFieldType {
   RADIO = 'radio',
   INPUT = 'input',
