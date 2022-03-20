@@ -1,24 +1,24 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import Sidebar from '../../components';
 import { CustomForm, PrimaryButton } from '../../components/common';
 import { Footer, Header } from '../../components/Layout';
-import randomColour from '../../helpers/utils';
+import { CopyToClipboardType } from '../../components/common/template/types';
+import CopyToClipboard from '../../components/common/template/CopyToClipboard';
 
 const Config: React.FC<{}> = () => {
   const gradientOptions = [{
     id: 'style',
     type: 'radio',
     title: 'Style',
-    optionsType: 'text',
-    options: ['Linear', 'Radial'],
+    options: ['linear-gradient', '-webkit-radial-gradient'],
     display: true,
   }, {
     id: 'direction',
     type: 'radio',
     title: 'Direction',
-    optionsType: 'icon',
-    options: ['arrow-up-left', 'arrow-up', 'arrow-up-right', 'arrow-left', 'circle_middle', 'arrow-right', 'arrow-down-left', 'arrow-down', 'arrow-down-right'],
+    options: ['to left top', 'to top', 'to right top', 'to left', 'at center center', 'to right', 'to left bottom', 'to bottom', 'to right bottom'],
     display: true,
   }, {
     id: 'colours',
@@ -30,7 +30,6 @@ const Config: React.FC<{}> = () => {
     id: 'outputFormat',
     type: 'radio',
     title: 'Output format',
-    optionsType: 'text',
     options: ['Hex', 'Rgba'],
     display: true,
   }, {
@@ -48,13 +47,15 @@ const Config: React.FC<{}> = () => {
   },
   ];
 
+  const gradient = useSelector((state: any) => state.gradient);
+
   const initialValues = {
     name: '',
     author: '',
-    style: 'Linear',
-    direction: 'arrow-up-left',
-    colours: [`#${randomColour()}`, `#${randomColour()}`],
-    outputFormat: 'Hex',
+    style: gradient.gradient.style,
+    direction: gradient.gradient.direction,
+    colours: gradient.gradient.colours,
+    outputFormat: gradient.gradient.outputFormat,
   };
 
   const validationSchema = Yup.object().shape({
@@ -80,6 +81,7 @@ const Config: React.FC<{}> = () => {
     <PrimaryButton
       key="loadTemplate"
       label="Load from template"
+      onClick={() => console.log('hi')}
     />,
     <CustomForm
       key="configForm"
@@ -94,10 +96,12 @@ const Config: React.FC<{}> = () => {
     <PrimaryButton
       key="getCSS"
       label="Get CSS"
+      onClick={() => CopyToClipboard(CopyToClipboardType.CSS, gradient)}
     />,
     <PrimaryButton
       key="getShareLink"
       label="Get share link"
+      onClick={() => CopyToClipboard(CopyToClipboardType.SHARE_LINK, gradient)}
     />,
     <Footer key="signature" />,
   ];

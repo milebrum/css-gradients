@@ -4,13 +4,14 @@ import styles from './PrimaryButton.module.css';
 
 interface PrimaryButtonProps {
   label: string;
+  onClick: () => void;
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = (props) => {
-  const { label } = props;
+  const { label, onClick } = props;
 
   return (
-    <Button className={styles.btn}>{label}</Button>
+    <Button className={styles.btn} onClick={() => onClick()}>{label}</Button>
   );
 };
 
