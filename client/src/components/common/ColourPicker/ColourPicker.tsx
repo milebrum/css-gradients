@@ -1,8 +1,6 @@
-import { Box } from '@mui/material';
 import React from 'react';
 import { HexColorPicker } from 'react-colorful';
 import { ConfigPopover } from '../template/types';
-import styles from './ColourPicker.module.css';
 
 interface ColourPickerProps {
   colour: string;
@@ -30,9 +28,7 @@ const ColourPicker: React.FC<ColourPickerProps> = (props) => {
   }, [colourSelected]);
 
   return (
-    <Box className={styles.cunt}>
-      <HexColorPicker color={colour} onChange={setColourSelected} />
-    </Box>
+    <HexColorPicker color={colour} onChange={setColourSelected} />
   );
 };
 
