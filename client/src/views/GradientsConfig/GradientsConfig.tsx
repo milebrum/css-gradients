@@ -12,7 +12,7 @@ const Config: React.FC<{}> = () => {
     id: 'style',
     type: 'radio',
     title: 'Style',
-    options: ['linear-gradient', '-webkit-radial-gradient'],
+    options: ['linear-gradient', 'radial-gradient'],
     display: true,
   }, {
     id: 'direction',

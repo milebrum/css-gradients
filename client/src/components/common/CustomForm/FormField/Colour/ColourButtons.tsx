@@ -1,11 +1,11 @@
 import React from 'react';
 import { Box, Button } from '@mui/material';
+import { useSelector } from 'react-redux';
 import styles from './ColourButtons.module.css';
 import randomColour from '../../../../../helpers/utils';
 
 interface ColourButtonsProps {
   name: string;
-  colourValues: string[];
   handleChange: (
     e: React.MouseEvent<HTMLElement> | null,
     newValue: string[],
@@ -16,12 +16,14 @@ interface ColourButtonsProps {
 
 const ColourButtons: React.FC<ColourButtonsProps> = (props) => {
   const {
-    name, colourValues, isError, handleChange,
+    name, isError, handleChange,
   } = props;
+
+  const gradientColours = useSelector((state: any) => state.gradient.gradient.colours);
 
   const setRandomColours = () => {
     const newColourValues: string[] = [];
-    colourValues.forEach(() => {
+    gradientColours.forEach(() => {
       newColourValues.push(`#${randomColour()}`);
     });
     handleChange(null, newColourValues);
@@ -29,7 +31,7 @@ const ColourButtons: React.FC<ColourButtonsProps> = (props) => {
 
   return (
     <Box className={styles.colourBox}>
-      {colourValues.map((value) => (
+      {gradientColours.map((value: string) => (
         <Button
           key={value}
           name={name}
@@ -38,7 +40,7 @@ const ColourButtons: React.FC<ColourButtonsProps> = (props) => {
           style={{ background: value }}
           onClick={(
             e: React.MouseEvent<HTMLElement>,
-          ) => handleChange(e, colourValues, value)}
+          ) => handleChange(e, gradientColours, value)}
         />
       ))}
       <Button className={styles.colourBtn} onClick={() => setRandomColours()}>Random</Button>

@@ -1,7 +1,9 @@
 import React from 'react';
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { useSelector } from 'react-redux';
 import styles from './RadioButtons.module.css';
 import showGradientOptions from '../../../template/ShowGradientOptions';
+import { DirectionIconsType, StyleType } from '../../../template/types';
 
 interface RadioButtonsProps {
   name: string;
@@ -15,6 +17,8 @@ const RadioButtons: React.FC<RadioButtonsProps> = (props) => {
   const {
     name, radioButtons, value, handleChange, isError,
   } = props;
+
+  const gradientStyle = useSelector((state: any) => state.gradient.gradient.style);
 
   // value selector buttons
   const handleSelect = (e: React.MouseEvent<HTMLElement>, newSelected: string) => {
@@ -44,7 +48,7 @@ const RadioButtons: React.FC<RadioButtonsProps> = (props) => {
             color={isError ? 'error' : 'standard'}
             value={button}
             aria-label={button}
-            className={styles.radioBtn}
+            className={`${styles.radioBtn} ${gradientStyle === StyleType.LINEAR && button === DirectionIconsType.CENTER && styles.hidden}`}
           >
             {name === 'outputFormat' ? (
               button

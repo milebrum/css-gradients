@@ -28,7 +28,7 @@ export enum FormFieldType {
 
 export enum StyleType {
   LINEAR = 'linear-gradient',
-  RADIAL = '-webkit-radial-gradient',
+  RADIAL = 'radial-gradient',
 }
 
 export enum DirectionIconsType {

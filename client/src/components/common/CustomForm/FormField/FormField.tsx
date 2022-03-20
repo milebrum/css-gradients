@@ -99,7 +99,6 @@ const FormField: React.FC<FormFieldProps> = (props) => {
         return (
           <ColourButtons
             name={formField.id}
-            colourValues={value}
             handleChange={handleChange}
             isError={isError}
           />

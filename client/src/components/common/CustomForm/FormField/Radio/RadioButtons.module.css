@@ -27,3 +27,7 @@
   line-height: 1.66;
   margin-top: 3px;
 }
+
+.hidden {
+  visibility: hidden;
+}
