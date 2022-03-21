@@ -6,8 +6,11 @@ import { CustomForm, PrimaryButton } from '../../components/common';
 import { Footer, Header } from '../../components/Layout';
 import { CopyToClipboardType } from '../../components/common/template/types';
 import CopyToClipboard from '../../components/common/template/CopyToClipboard';
+import RoutePaths from '../../config/constants/route-paths';
 
 const Config: React.FC<{}> = () => {
+  const [templateData, setTemplateData] = React.useState<any>();
+
   const gradientOptions = [{
     id: 'style',
     type: 'radio',
@@ -63,30 +66,36 @@ const Config: React.FC<{}> = () => {
     author: Yup.string().required('This field is required'),
   });
 
-  const internalCreateTemplate = async (values: Record<string, any>) => {
-    const templateData = {
+  const createTemplate = async (values: Record<string, any>) => {
+    setTemplateData({
       name: values.name,
       author: values.author,
       style: values.style,
       direction: values.direction,
       colours: values.colours,
       outputFormat: values.outputFormat,
-    };
-    console.log(templateData);
-    // createTemplate(templateData);
+    });
   };
+
+  React.useEffect(() => {
+    fetch('/saveTemplate', {
+      method: 'POST',
+      body: JSON.stringify(templateData),
+      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    });
+  }, [templateData]);
 
   const sidebarElements = [
     <Header key="textLogo" />,
     <PrimaryButton
       key="loadTemplate"
       label="Load from template"
-      onClick={() => console.log('hi')}
+      onClick={() => window.location.assign(RoutePaths.templates)}
     />,
     <CustomForm
       key="configForm"
       onComplete={(values: any) => {
-        internalCreateTemplate(values);
+        createTemplate(values);
       }}
       formFields={gradientOptions}
       submitLabel="Save as template"
