@@ -8,6 +8,7 @@ interface RouteTypeComponent extends RouteTypeBase {
 }
 
 export type RouteKeys =
-  | 'main';
+  | 'main'
+  | 'templates';
 
 export type RouteType = RouteTypeComponent;
