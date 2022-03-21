@@ -1,0 +1,10 @@
+.colourBox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.colourBtn {
+  width: 80px;
+  height: 32px;
+}
