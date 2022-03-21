@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React from 'react';
 import styles from './TemplatesPage.module.css';
 import ListItem from '../../components/common/list/ListItem/ListItem';
@@ -27,9 +27,13 @@ const Templates: React.FC<{}> = () => {
 
   return (
     <Box className={styles.root}>
-      {storedTemplates.map((template: any) => (
-        <ListItem key={template.name} template={template} onClick={() => onClick(template)} />
-      ))}
+      {storedTemplates.length ? (
+        storedTemplates.map((template: any) => (
+          <ListItem key={template.name} template={template} onClick={() => onClick(template)} />
+        ))
+      ) : (
+        <Typography>No stored templates!</Typography>
+      )}
     </Box>
   );
 };
