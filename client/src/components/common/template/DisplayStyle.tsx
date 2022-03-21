@@ -1,6 +1,6 @@
 import { StyleType } from './types';
 
-const DisplayStyle = ({ gradient: { style, direction, colours } }: any) => {
+const DisplayStyle = ({ style, direction, colours }: any) => {
   switch (style) {
     case StyleType.LINEAR:
       return (`${style}(${direction}, ${colours.toString()})`);
