@@ -10,6 +10,7 @@ import RoutePaths from '../../config/constants/route-paths';
 
 const Config: React.FC<{}> = () => {
   const [templateData, setTemplateData] = React.useState<any>();
+  const [copiedToClipboard, setCopiedToClipboard] = React.useState({ copied: false, type: '' });
 
   const gradientOptions = [{
     id: 'style',
@@ -85,6 +86,14 @@ const Config: React.FC<{}> = () => {
     });
   }, [templateData]);
 
+  const copyToClipboard = (type: CopyToClipboardType, toCopy: any) => {
+    CopyToClipboard(type, toCopy);
+    setCopiedToClipboard({ copied: true, type });
+    setTimeout(() => {
+      setCopiedToClipboard({ copied: false, type });
+    }, 2000);
+  };
+
   const sidebarElements = [
     <Header key="textLogo" />,
     <PrimaryButton
@@ -104,13 +113,13 @@ const Config: React.FC<{}> = () => {
     />,
     <PrimaryButton
       key="getCSS"
-      label="Get CSS"
-      onClick={() => CopyToClipboard(CopyToClipboardType.CSS, gradient)}
+      label={copiedToClipboard.copied && copiedToClipboard.type === CopyToClipboardType.CSS ? 'Yay! Copied to clipboard!' : 'Get CSS'}
+      onClick={() => copyToClipboard(CopyToClipboardType.CSS, gradient)}
     />,
     <PrimaryButton
       key="getShareLink"
-      label="Get share link"
-      onClick={() => CopyToClipboard(CopyToClipboardType.SHARE_LINK, gradient)}
+      label={copiedToClipboard.copied && copiedToClipboard.type === CopyToClipboardType.SHARE_LINK ? 'Yay! Copied to clipboard!' : 'Get share link'}
+      onClick={() => copyToClipboard(CopyToClipboardType.SHARE_LINK, gradient)}
     />,
     <Footer key="signature" />,
   ];

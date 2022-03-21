@@ -1,0 +1,5 @@
+.btn:hover {
+  background: #3d4853;
+  color: #fff;
+  box-shadow: 0 7px 14px rgb(50 50 93 / 10%), 0 3px 6px rgb(0 0 0 / 8%);
+}
