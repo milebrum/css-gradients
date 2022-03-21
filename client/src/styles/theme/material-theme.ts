@@ -36,6 +36,13 @@ const Theme = createTheme({
         },
       },
     },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'Poppins, sans-serif',
+        },
+      },
+    },
   },
 });
 
