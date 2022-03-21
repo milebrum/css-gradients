@@ -40,6 +40,7 @@ const Theme = createTheme({
       styleOverrides: {
         root: {
           fontFamily: 'Poppins, sans-serif',
+          textTransform: 'capitalize',
         },
       },
     },
